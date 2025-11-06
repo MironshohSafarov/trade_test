@@ -8,8 +8,8 @@ from telegram.constants import ChatAction
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 
 # Muhit o'zgaruvchilarini o'qish
-OPENAI_API_KEY = os.getenv("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")
-TELEGRAM_BOT_TOKEN = os.getenv("8449482619:AAEctGWUUfGZtCni1QNgiDxT8W8kdhYWqB0")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 if not OPENAI_API_KEY or not TELEGRAM_BOT_TOKEN:
     raise RuntimeError("OPENAI_API_KEY va TELEGRAM_BOT_TOKEN muhit o'zgaruvchilarini o'rnating.")
@@ -48,7 +48,7 @@ async def help_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Menga oddiy xabar yuboring. Masalan:\n"
         "'XAUUSD uchun London sessiya senariylari?' yoki\n"
-        "'Python-da fayl qanday o'qiladi?'."
+        "'Python-da fayl qanday o'qiladi?'"
     )
 
 async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -78,7 +78,7 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(answer[i:i+CHUNK])
 
 def main():
-    keep_alive()  # <-- Flask serverni ishga tushiramiz
+    keep_alive()  # Flask serverni ishga tushiramiz
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_cmd))
